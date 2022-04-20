@@ -9,21 +9,10 @@
         },
         "metadata": {
           "properties": {
-            "author_firstname": {
+            "author": {
               "type": "text",
               "fielddata": true,
               "fields" : {
-                "keyword": {
-                  "type": "text",
-                  "analyzer": "keyword",
-                  "fielddata": "true"
-                }
-              }
-            },
-            "author_name": {
-              "type": "text",
-              "fielddata": true,
-              "fields": {
                 "keyword": {
                   "type": "text",
                   "analyzer": "keyword",
