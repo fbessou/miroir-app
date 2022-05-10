@@ -19,6 +19,17 @@
                   "fielddata": "true"
                 }
               }
+            },
+            "genre": {
+              "type": "text",
+              "fielddata": true,
+              "fields": {
+                "keyword": {
+                  "type": "text",
+                  "analyzer": "keyword",
+                  "fielddata": "true"
+                }
+              }
             }
           }
         }

@@ -48,6 +48,9 @@ def load_elastic_conf(index_name, rebuild=False):
         raise e
 
 def obtain_metadata(completeResponse, metadataDts):
+    """
+    Extract metadata from the DTS response
+    """
     metadata = {}
     sources = [
         {"name": "data_bnf", "ext": "data.bnf.fr"},

@@ -36,7 +36,7 @@ def register_search_endpoint(bp, api_version="1.0", compose_result_func: Callabl
         no_highlight = request.args.get("no-highlight", False)
         no_highlight = type(no_highlight) == str
 
-        #if query is None:
+        # if query is None:
         #    return Response(status=400)
 
         # if request has pagination parameters
@@ -136,7 +136,7 @@ def register_search_endpoint(bp, api_version="1.0", compose_result_func: Callabl
                 body["size"] = 0
 
                 sort_criteriae.reverse()
-                #for crit in sort_criteriae:
+                # for crit in sort_criteriae:
                 #    for crit_name, crit_order in crit.items():
                 #        source = {
                 #            crit_name: {
@@ -171,7 +171,7 @@ def register_search_endpoint(bp, api_version="1.0", compose_result_func: Callabl
                 pprint.pprint(body)
                 # perform the search
                 search_result = current_app.elasticsearch.search(index=index, doc_type="_doc", body=body)
-                #pprint.pprint(search_result['aggregations'])
+                # pprint.pprint(search_result['aggregations'])
                 results: list = compose_result_func(search_result)
                 count: int = search_result['hits']['total']
 
@@ -210,7 +210,7 @@ def register_search_endpoint(bp, api_version="1.0", compose_result_func: Callabl
                             bucket['_ids'] = sorted([h["_id"] for h in ids_result['hits']["hits"]])
 
                     r = {
-                        #"data": results,
+                        # "data": results,
                         "buckets": buckets,
                         "after_key": after_key,
                         "total-count": total_count,

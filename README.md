@@ -1,4 +1,4 @@
-# encpos-app
+# miroir-app
 
 Run ```python flask_app.py``` to launch the api server
 
