@@ -31,12 +31,32 @@ cd elasticsearch-6.8.14
 sudo bin/elasticsearch-plugin install analysis-icu
 ```
 
+**Launch**
+```
+service elasticsearch start
+```
 ## Indexer le corpus
 
+**Update the conf**
+
+```
+python manage.py update-conf --rebuild
+```
+
+**Index the data** 
+```
+python manage.py index --root_collection miroir
+```
 
 ## Lancer l’application
 
 Run ```python flask_app.py``` to launch the api server
+
+## Tester 
+
+```
+http://0.0.0.0:5003/api/1.0/search?query=content:César
+```
 
 And use the following for offline commands:
 ```bash
