@@ -45,6 +45,14 @@ pip install -r requirement.txt
 
 ```
 
+**Update files dev.env**
+```
+DOCUMENT_INDEX = 'miroir_document'
+COLLECTION_INDEX = 'miroir_collection'
+#ALL_YEARS=1849-2021
+DTS_URL = url/dts
+```
+
 **Update the conf**
 
 ```
