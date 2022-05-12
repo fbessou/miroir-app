@@ -50,6 +50,11 @@ python manage.py index --root_collection miroir
 
 ## Lancer l’application
 
+**Launch elasticsearch**
+```
+service elasticsearch start
+```
+
 Run ```python flask_app.py``` to launch the api server
 
 ## Tester 
