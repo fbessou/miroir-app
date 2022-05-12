@@ -50,9 +50,11 @@ pip install -r requirements.txt
 
 **Update dev.env**
 ```
+ELASTICSEARCH_URL = http://localhost:9200
+ELASTICSEARCH_CONFIG_DIR = 'elasticsearch'
 DOCUMENT_INDEX = 'miroir_document'
 COLLECTION_INDEX = 'miroir_collection'
-DTS_URL = url/dts
+DTS_URL = http://localhost:5050/dts
 ```
 
 **Update the conf**
@@ -75,7 +77,7 @@ python flask_app.py
 ## Tester 
 
 ```
-http://0.0.0.0:5003/api/1.0/search?query=content:César
+http://localhost:5003/api/1.0/search?query=content:César
 ```
 
 And use the following for offline commands:
