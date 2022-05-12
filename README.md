@@ -32,24 +32,26 @@ sudo bin/elasticsearch-plugin install analysis-icu
 ```
 
 **Launch**
+
 ```
 service elasticsearch start
 ```
+
 ## Indexer le corpus
+
 **Install venv**
 
 ```
+cd miroir-app
 python3.8 -m venv venv
 source venv/bin/activate
-pip install -r requirement.txt
-
+pip install -r requirements.txt
 ```
 
-**Update files dev.env**
+**Update dev.env**
 ```
 DOCUMENT_INDEX = 'miroir_document'
 COLLECTION_INDEX = 'miroir_collection'
-#ALL_YEARS=1849-2021
 DTS_URL = url/dts
 ```
 
@@ -66,12 +68,9 @@ python manage.py index --root_collection miroir
 
 ## Lancer l’application
 
-**Launch elasticsearch**
 ```
-service elasticsearch start
+python flask_app.py
 ```
-
-Run ```python flask_app.py``` to launch the api server
 
 ## Tester 
 
@@ -80,11 +79,12 @@ http://0.0.0.0:5003/api/1.0/search?query=content:César
 ```
 
 And use the following for offline commands:
+
 ```bash
 
-> python cli.py --help
+> python manage.py --help
 
-Usage: cli.py [OPTIONS] COMMAND [ARGS]...
+Usage: manage.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --help  Show this message and exit.
@@ -94,5 +94,4 @@ Commands:
   index        Rebuild the elasticsearch indexes
   search       Perform a search using the provided query.
   update-conf  Update the index configuration and mappings
-
 ```
