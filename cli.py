@@ -71,7 +71,7 @@ def obtain_metadata(completeResponse, metadataDts):
     metadata["title_rich"] = metadataDts["dts:extensions"]["{0}:h1".format(htmlnamespace)]
     metadata["author"] = metadataDts["dts:extensions"]["{0}:creator".format(dcnamespace)]
     metadata["date"] = metadataDts["dts:dublincore"]["dct:date"]
-    #metadata["genre"] = metadataDts["dts:extensions"]["{0}:description".format(dcnamespace)]
+    metadata["genre"] = metadataDts["dts:extensions"]["{0}:description".format(dcnamespace)]
 
     return metadata
 
