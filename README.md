@@ -1,27 +1,11 @@
 # miroir-app
 
-Surcouche d’API Elasticsearch 6.8, pour la recherche.
+Surcouche d’API Elasticsearch 8.12, pour la recherche.
 
 
 ## Installation ES
 
-Installer [ES 6.8.14](https://www.elastic.co/fr/downloads/past-releases/elasticsearch-6-8-14).
-
-Howto : [https://www.elastic.co/guide/en/elasticsearch/reference/6.8/zip-targz.html](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/zip-targz.html)
-
-**Install**
-
-```
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.14.zip
-unzip elasticsearch-6.8.14.zip
-cd elasticsearch-6.8.14
-```
-
-**Run**
-
-```
-./bin/elasticsearch
-```
+Installer [ES 8.12.12](https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html).
 
 **Configure**
 
@@ -43,7 +27,7 @@ service elasticsearch start
 
 ```
 cd miroir-app
-python3.8 -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -60,18 +44,18 @@ DTS_URL = http://localhost:5050/dts
 **Update the conf**
 
 ```
-python manage.py update-conf --rebuild
+python3 manage.py update-conf --rebuild
 ```
 
 **Index the data** 
 ```
-python manage.py index --root_collection miroir
+python3 manage.py index --root_collection miroir
 ```
 
 ## Lancer l’application
 
 ```
-python flask_app.py
+python3 flask_app.py
 ```
 
 ## Tester 
@@ -84,7 +68,7 @@ And use the following for offline commands:
 
 ```bash
 
-> python manage.py --help
+> python3 manage.py --help
 
 Usage: manage.py [OPTIONS] COMMAND [ARGS]...
 

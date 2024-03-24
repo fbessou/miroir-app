@@ -195,7 +195,6 @@ def make_cli(env='dev'):
 
                 app.elasticsearch.index(
                     index=_index_name,
-                    doc_type="_doc",
                     id=miroir_id,
                     body={
                         "content": content,
@@ -208,7 +207,7 @@ def make_cli(env='dev'):
         # INDEXATION DES COLLECTIONS
         try:
             _index_name = app.config['COLLECTION_INDEX']
-            # app.elasticsearch.index(index=_index_name, doc_type="_doc", id=encpos_id,  body={})
+            # app.elasticsearch.index(index=_index_name, id=encpos_id,  body={})
         except Exception as e:
             print('Indexation error: ', str(e))
 
