@@ -49,7 +49,7 @@ python3 manage.py update-conf --rebuild
 
 **Index the data** 
 ```
-python3 manage.py index --root_collection miroir
+python3 manage.py index --root_collection=miroir
 ```
 
 ## Lancer l’application
