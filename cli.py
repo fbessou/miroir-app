@@ -150,7 +150,7 @@ def make_cli(env='dev'):
                 raise e
 
     @click.command("index")
-    @click.option('--root_collection', required=True, default="all", help="give the dts root collection")
+    @click.option('--root_collection', required=True, default="miroir", help="give the dts root collection")
     def index(root_collection):
         """
         Rebuild the elasticsearch indexes
