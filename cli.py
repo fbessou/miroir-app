@@ -29,6 +29,7 @@ def load_elastic_conf(index_name, rebuild=False):
     print(url)
     try:
         if rebuild:
+            print(f"Deleting {index_name} index.")
             res = requests.delete(url)
         with open(f'{app.config["ELASTICSEARCH_CONFIG_DIR"]}/_global.conf.json', 'r') as _global:
             global_settings = json.load(_global)
@@ -82,9 +83,10 @@ def make_cli(env='dev'):
     """
 
     @click.group()
-    def cli():
+    @click.option('--config', default="staging", type=click.Choice(["local", "staging", "prod"]), help="select appropriate .env file to use", show_default=True)
+    def cli(config):
         global app
-        app = create_app(env)
+        app = create_app(config)
         app.all_indexes = f"{app.config['DOCUMENT_INDEX']},{app.config['COLLECTION_INDEX']}"
 
     @click.command("search")
@@ -144,6 +146,7 @@ def make_cli(env='dev'):
             url = '/'.join([app.config['ELASTICSEARCH_URL'], name])
             res = None
             try:
+                print(f"Deleting {name} index.")
                 res = requests.delete(url)
             except Exception as e:
                 print(res.text, str(e), flush=True, end=" ")
@@ -159,11 +162,15 @@ def make_cli(env='dev'):
         # BUILD THE METADATA DICT FROM THE GITHUB TSV FILE
 
         _DTS_URL = app.config['DTS_URL']
-        metadata = {}
         # INDEXATION DES DOCUMENTS
-        try:
-            _index_name = app.config['DOCUMENT_INDEX']
+        _index_name = app.config['DOCUMENT_INDEX']
+        if not app.elasticsearch.indices.exists(index=_index_name):
+            print(f"Index {_index_name} not found.")
+            load_elastic_conf(_index_name, rebuild=False)
 
+        metadata = {}
+        try:
+            print(f"Fetching root collection ({root_collection})")
             response_collection = requests.get(f'{_DTS_URL}/collections?id={root_collection}').json()
             list_wait_collections = []
             listDoc = []
@@ -177,6 +184,7 @@ def make_cli(env='dev'):
                     metadata[member["@id"]] = {"title": member["title"]}
 
             while list_wait_collections != []:
+                print(f"Fetching sub-collection ({list_wait_collections[0]})")
                 response_collection = requests.get(f'{_DTS_URL}/collections?id={list_wait_collections[0]}').json()
                 for member in response_collection["member"]:
                     if member["@type"] == "Collection":
@@ -187,6 +195,7 @@ def make_cli(env='dev'):
                         metadata[member["@id"]] = obtain_metadata(response_collection, member)
 
                 list_wait_collections.pop(0)
+            print(f"Fetching documents from DTS and indexing them.")
             for miroir_id in listDoc:
                 response = requests.get(f'{_DTS_URL}/document?id={miroir_id}')
 
